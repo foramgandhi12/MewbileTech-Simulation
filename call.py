@@ -1,16 +1,3 @@
-"""
-CSC148, Winter 2019
-Assignment 1
-
-This code is provided solely for the personal and private use of
-students taking the CSC148 course at the University of Toronto.
-Copying for purposes other than this use is expressly prohibited.
-All forms of distribution of this code, whether as given or with
-any changes, are expressly prohibited.
-
-All of the files in this directory and all subdirectories are:
-Copyright (c) 2019 Bogdan Simion, Diane Horton, Jacqueline Smith
-"""
 import datetime
 import os
 from typing import Tuple, List, Optional
@@ -20,13 +7,6 @@ import pygame
 # Sprite files to display the start and end of a call
 START_CALL_SPRITE = 'data/call-start-2.png'
 END_CALL_SPRITE = 'data/call-end-2.png'
-
-
-# ----------------------------------------------------------------------------
-# NOTE: You do not need to understand the implementation of the Drawable class
-# to be able to solve this assignment. However, feel feel free to read it for
-# the fun of understanding the visualization system.
-# ----------------------------------------------------------------------------
 
 class Drawable:
     """A class for objects that the graphical renderer can draw.
@@ -49,7 +29,7 @@ class Drawable:
                  linelimits: Optional[Tuple[Tuple[float, float],
                                             Tuple[float, float]]] = None) \
             -> None:
-        """Initialize this drawable object with the <sprite_file>, <location>
+        """Initializes this drawable object with the <sprite_file>, <location>
         and <linelimits>.
         """
         self.linelimits = None
@@ -65,12 +45,12 @@ class Drawable:
             self.linelimits = linelimits
 
     def get_position(self) -> Tuple[float, float]:
-        """Return the (long, lat) position of this object at the given time.
+        """Returns the (long, lat) position of this object at the given time.
         """
         return self.loc
 
     def get_linelimits(self) -> Optional[Tuple[float, float]]:
-        """Return the limits for the line if the drawable is a line type
+        """Returns the limits for the line if the drawable is a line type
         (otherwise None)
         """
         return self.linelimits
@@ -116,7 +96,7 @@ class Call:
                  calltime: datetime.datetime, duration: int,
                  src_loc: Tuple[float, float], dst_loc: Tuple[float, float]) \
             -> None:
-        """ Create a new Call object with the given parameters.
+        """ Creates a new Call object with the given parameters.
         """
         self.src_number = src_nr
         self.dst_number = dst_nr
@@ -132,24 +112,18 @@ class Call:
         self.connection = Drawable(linelimits=(src_loc, dst_loc))
 
     def get_bill_date(self) -> Tuple[int, int]:
-        """ Return the billing date for this Call, as a tuple containing the
+        """ Returns the billing date for this Call, as a tuple containing the
         month and the year
         """
         return self.time.month, self.time.year
 
-    # ----------------------------------------------------------
-    # NOTE: You do not need to understand the implementation of
-    # the following methods, to be able to solve this assignment
-    # but feel free to read them to get a sense of what these do.
-    # ----------------------------------------------------------
-
     def get_drawables(self) -> List[Drawable]:
-        """ Return the list of drawable sprites for this Call
+        """ Returns the list of drawable sprites for this Call
         """
         return self.drawables
 
     def get_connection(self) -> Drawable:
-        """ Return the connecting line for this Call start and end locations
+        """ Returns the connecting line for this Call start and end locations
         """
         return self.connection
 
