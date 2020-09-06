@@ -1,16 +1,3 @@
-"""
-CSC148, Winter 2019
-Assignment 1
-
-This code is provided solely for the personal and private use of
-students taking the CSC148 course at the University of Toronto.
-Copying for purposes other than this use is expressly prohibited.
-All forms of distribution of this code, whether as given or with
-any changes, are expressly prohibited.
-
-All of the files in this directory and all subdirectories are:
-Copyright (c) 2019 Bogdan Simion, Diane Horton, Jacqueline Smith
-"""
 from typing import List, Dict, Tuple, Optional, Union
 from call import Call
 from callhistory import CallHistory
@@ -43,7 +30,7 @@ class PhoneLine:
     callhistory: CallHistory
 
     def __init__(self, number: str, contract: Contract) -> None:
-        """ Create a new PhoneLine with <number> and <contract>.
+        """ Creates a new PhoneLine with <number> and <contract>.
         """
         self.number = number
         self.contract = contract
@@ -51,17 +38,17 @@ class PhoneLine:
         self.bills = {}
 
     def new_month(self, month: int, year: int) -> None:
-        """ Advance to a new month (specified by <month> and <year>) in the
+        """ Advances to a new month (specified by <month> and <year>) in the
         contract corresponding to this phone line.
         If the new month+year does not already exist in the <bills> attribute,
-        create a new bill.
+        creates a new bill.
         """
         if (month, year) not in self.bills:
             self.bills[(month, year)] = Bill()
             self.contract.new_month(month, year, self.bills[(month, year)])
 
     def make_call(self, call: Call) -> None:
-        """ Add the <call> to this phone line's callhistory, and bill it
+        """ Adds the <call> to this phone line's callhistory, and bills it
         according to the contract for this phone line.
         If there is no bill for the current monthly billing cycle, then a new
         month must be <started> by advancing to the right month from <call>.
@@ -73,7 +60,7 @@ class PhoneLine:
         self.contract.bill_call(call)
 
     def receive_call(self, call: Call) -> None:
-        """ Add the <call> to this phone line's callhistory.
+        """ Adds the <call> to this phone line's callhistory.
         Incoming calls are not billed under any contract.
         However, if there is no bill for the current monthly billing cycle,
         then a new month must be <started> by advancing to the right month from
@@ -84,29 +71,23 @@ class PhoneLine:
         self.callhistory.register_incoming_call(call)
 
     def cancel_line(self) -> float:
-        """ Cancel this line's contract and return the outstanding bill amount
+        """ Cancels this line's contract and returns the outstanding bill amount
         """
         return self.contract.cancel_contract()
 
-    # ----------------------------------------------------------
-    # NOTE: You do not need to understand the implementation of
-    # the following methods, to be able to solve this assignment
-    # but feel free to read them to get a sense of what these do.
-    # ----------------------------------------------------------
-
     def get_number(self) -> str:
-        """ Return the phone number for this line
+        """ Returns the phone number for this line
         """
         return self.number
 
     def get_call_history(self) -> CallHistory:
-        """ Return the CallHistory for this line
+        """ Returns the CallHistory for this line
         """
         return self.callhistory
 
     def get_monthly_history(self, month: int = None, year: int = None) -> \
             Tuple[List[Call], List[Call]]:
-        """ Return all calls this line has made during the <month> month of the
+        """ Returns all calls this line has made during the <month> month of the
         <year> year, formatted as a Tuple containing two lists, in this order:
         outgoing calls, incoming calls
 
@@ -122,7 +103,7 @@ class PhoneLine:
 
     def get_bill(self, month: int, year: int) \
             -> Optional[Dict[str, Union[float, int]]]:
-        """ Return a bill summary for the <month>+<year> billing cycle, as a
+        """ Returns a bill summary for the <month>+<year> billing cycle, as a
         dictionary.
         This dictionary will include the following string keys:
         "number" - indicates the phone number
