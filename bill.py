@@ -1,18 +1,4 @@
-"""
-CSC148, Winter 2019
-Assignment 1
-
-This code is provided solely for the personal and private use of
-students taking the CSC148 course at the University of Toronto.
-Copying for purposes other than this use is expressly prohibited.
-All forms of distribution of this code, whether as given or with
-any changes, are expressly prohibited.
-
-All of the files in this directory and all subdirectories are:
-Copyright (c) 2019 Bogdan Simion, Diane Horton, Jacqueline Smith
-"""
 from typing import Dict, Union
-
 
 class Bill:
     """ A single month's bill for a customer's phone line.
@@ -54,7 +40,7 @@ class Bill:
     type: str
 
     def __init__(self) -> None:
-        """ Create a new Bill.
+        """ Creates a new Bill.
         """
         self.billed_min = 0
         self.free_min = 0
@@ -64,41 +50,35 @@ class Bill:
 
     def set_rates(self, contract_type: str, min_cost: float) \
             -> None:
-        """ Set this Bill's contract type to <contract_type>.
-        Set this Bill's calling rate to <min_cost>.
+        """ Sets this Bill's contract type to <contract_type>.
+        Sets this Bill's calling rate to <min_cost>.
         """
         self.type = contract_type
         self.min_rate = min_cost
 
     def add_fixed_cost(self, cost: float) -> None:
-        """ Add a fixed one-time cost <cost> onto the bill.
+        """ Adds a fixed one-time cost <cost> onto the bill.
         """
         self.fixed_cost += cost
 
     def add_billed_minutes(self, minutes: int) -> None:
-        """ Add <minutes> minutes as billable minutes
+        """ Adds <minutes> minutes as billable minutes
         """
         self.billed_min += minutes
 
     def add_free_minutes(self, minutes: int) -> None:
-        """ Add <minutes> minutes as free minutes
+        """ Adds <minutes> minutes as free minutes
         """
         self.free_min += minutes
 
     def get_cost(self) -> float:
-        """ Return bill amount, considering the rates for billable calls for
+        """ Returns bill amount, considering the rates for billable calls for
         this Bill's contract type.
         """
         return self.min_rate * self.billed_min + self.fixed_cost
 
-    # ----------------------------------------------------------
-    # NOTE: You do not need to understand the implementation of
-    # the following method, to be able to solve this assignment
-    # but feel free to read it to get a sense of what it does.
-    # ----------------------------------------------------------
-
     def get_summary(self) -> Dict[str, Union[float, int]]:
-        """ Return a bill summary as a dictionary containing the bill details.
+        """ Returns a bill summary as a dictionary containing the bill details.
         """
         bill_summary = {'type': self.type,
                         'fixed': self.fixed_cost,
