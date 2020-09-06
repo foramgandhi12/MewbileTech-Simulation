@@ -2,13 +2,13 @@
  
 This repo contains an interactive simulation that displays phone call locations from registered company mobile plans on a map. This is done using mock data for the company's contract database. Each customer is registered on a plan/contract and the program keeps track of all their billing details and call history.
 
-###Types of Contracts
+### Types of Contracts
 
  - Month to Month Contract
  - Prepaid Contract
  - Term Contract
  
-###Basic Billing Details
+### Basic Billing Details
  
  - Billed Minutes
  - Free Minutes
@@ -16,7 +16,7 @@ This repo contains an interactive simulation that displays phone call locations 
  - Fixed Rate
  - Type of Contract
   
-###Unique Billing Details
+### Unique Billing Details
  
  - Added Fixed Cost
  - Added Billing Minutes
@@ -24,7 +24,7 @@ This repo contains an interactive simulation that displays phone call locations 
  - Bill Costs
  - Bill Summary
  
-###Call Details
+### Call Details
 
  - Source Number
  - Destination Number
@@ -33,12 +33,12 @@ This repo contains an interactive simulation that displays phone call locations 
  - Source Location
  - Destination Location
 
-###Call History
+### Call History
 
  - Incoming Calls
  - Outgoing Calls
 
-###Phoneline Details
+### Phoneline Details
 
  - Start New Month
  - Make Call
