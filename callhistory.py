@@ -1,16 +1,3 @@
-"""
-CSC148, Winter 2019
-Assignment 1
-
-This code is provided solely for the personal and private use of
-students taking the CSC148 course at the University of Toronto.
-Copying for purposes other than this use is expressly prohibited.
-All forms of distribution of this code, whether as given or with
-any changes, are expressly prohibited.
-
-All of the files in this directory and all subdirectories are:
-Copyright (c) 2019 Bogdan Simion, Diane Horton, Jacqueline Smith
-"""
 from typing import Dict, List, Tuple
 from call import Call
 
@@ -30,13 +17,13 @@ class CallHistory:
     outgoing_calls: Dict[Tuple[int, int], List[Call]]
 
     def __init__(self) -> None:
-        """ Create an empty CallHistory.
+        """ Creates an empty CallHistory.
         """
         self.outgoing_calls = {}
         self.incoming_calls = {}
 
     def register_outgoing_call(self, call: Call) -> None:
-        """ Register a Call <call> into this outgoing call history
+        """ Registers a Call <call> into this outgoing call history
         """
         y = call.time
         if (y.month, y.year) not in self.outgoing_calls:
@@ -46,7 +33,7 @@ class CallHistory:
             self.outgoing_calls[(y.month, y.year)].append(call)
 
     def register_incoming_call(self, call: Call) -> None:
-        """ Register a Call <call> into this incoming call history
+        """ Registers a Call <call> into this incoming call history
         """
 
         y = call.time
@@ -58,15 +45,9 @@ class CallHistory:
         elif (y.month, y.year) in self.incoming_calls:
             self.incoming_calls[(y.month, y.year)].append(call)
 
-    # ----------------------------------------------------------
-    # NOTE: You do not need to understand the implementation of
-    # the following methods, to be able to solve this assignment
-    # but feel free to read them to get a sense of what these do.
-    # ----------------------------------------------------------
-
     def get_monthly_history(self, month: int = None, year: int = None) -> \
             Tuple[List[Call], List[Call]]:
-        """ Return all outgoing and incoming calls for <month> and <year>,
+        """ Returns all outgoing and incoming calls for <month> and <year>,
         as a Tuple containing two lists in the following order:
         (outgoing calls, incoming calls)
 
