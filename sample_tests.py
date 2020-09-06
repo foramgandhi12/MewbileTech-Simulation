@@ -1,16 +1,3 @@
-"""
-CSC148, Winter 2019
-Assignment 1
-
-This code is provided solely for the personal and private use of
-students taking the CSC148 course at the University of Toronto.
-Copying for purposes other than this use is expressly prohibited.
-All forms of distribution of this code, whether as given or with
-any changes, are expressly prohibited.
-
-All of the files in this directory and all subdirectories are:
-Copyright (c) 2019 Bogdan Simion, Diane Horton, Jacqueline Smith
-"""
 import datetime
 import pytest
 
@@ -20,20 +7,9 @@ from contract import TermContract, MTMContract, PrepaidContract
 from phoneline import PhoneLine
 from filter import DurationFilter, CustomerFilter, ResetFilter
 
-"""
-This is a sample test file with a limited set of cases, which are similar in
-nature to the full autotesting suite
-
-Use this framework to check some of your work and as a starting point for
-creating your own tests
-
-*** Passing these tests does not mean that it will necessarily pass the
-autotests ***
-"""
-
 
 def create_single_customer_with_all_lines() -> Customer:
-    """ Create a customer with one of each type of PhoneLine
+    """ Creates a customer with one of each type of PhoneLine
     """
     contracts = [
         TermContract(start=datetime.date(year=2017, month=12, day=25),
@@ -108,7 +84,7 @@ test_dict = {'events': [
 
 
 def test_customer_creation() -> None:
-    """ Test for the correct creation of Customer, PhoneLine, and Contract
+    """ Tests for the correct creation of Customer, PhoneLine, and Contract
     classes
     """
     customer = create_single_customer_with_all_lines()
@@ -123,7 +99,7 @@ def test_customer_creation() -> None:
     assert bill[2][1]['total'] == 50
     assert bill[2][2]['total'] == -100
 
-    # Check for the customer creation in application.py
+    # Checks for the customer creation in application.py
     customer = create_customers(test_dict)[0]
     customer.new_month(12, 2017)
     bill = customer.generate_bill(12, 2017)
@@ -139,7 +115,7 @@ def test_customer_creation() -> None:
 
 
 def test_events() -> None:
-    """ Test the ability to make calls, and ensure that the CallHistory objects
+    """ Tests the ability to make calls, and ensure that the CallHistory objects
     are populated
     """
     customers = create_customers(test_dict)
@@ -147,7 +123,7 @@ def test_events() -> None:
 
     process_event_history(test_dict, customers)
 
-    # Check the bill has been computed correctly
+    # Checks the bill has been computed correctly
     bill = customers[0].generate_bill(1, 2018)
     assert bill[0] == 5555
     assert bill[1] == pytest.approx(-29.925)
@@ -158,7 +134,7 @@ def test_events() -> None:
     assert bill[2][2]['total'] == pytest.approx(-99.975)
     assert bill[2][2]['billed_mins'] == 1
 
-    # Check the CallHistory objects are populated
+    # Checks the CallHistory objects are populated
     history = customers[0].get_call_history('867-5309')
     assert len(history) == 1
     assert len(history[0].incoming_calls) == 1
@@ -171,9 +147,9 @@ def test_events() -> None:
 
 
 def test_contract_start_dates() -> None:
-    """ Test the start dates of the contracts.
+    """ Tests the start dates of the contracts.
 
-    Ensure that the start dates are the correct dates as specified in the given
+    Ensures that the start dates are the correct dates as specified in the given
     starter code.
     """
     customers = create_customers(test_dict)
@@ -186,18 +162,15 @@ def test_contract_start_dates() -> None:
 
 
 def test_filters() -> None:
-    """ Test the functionality of the filters.
-
-    We are only giving you a couple of tests here, you should expand both the
-    dataset and the tests for the different types of applicable filters
+    """ Tests the functionality of the filters.
     """
     customers = create_customers(test_dict)
     process_event_history(test_dict, customers)
 
-    # Populate the list of calls:
+    # Populates the list of calls:
     calls = []
     hist = customers[0].get_history()
-    # only consider outgoing calls, we don't want to duplicate calls in the test
+    # only considers outgoing calls, we don't want to duplicate calls in the test
     calls.extend(hist[0])
 
     # The different filters we are testing
