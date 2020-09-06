@@ -1,16 +1,3 @@
-"""
-CSC148, Winter 2019
-Assignment 1
-
-This code is provided solely for the personal and private use of
-students taking the CSC148 course at the University of Toronto.
-Copying for purposes other than this use is expressly prohibited.
-All forms of distribution of this code, whether as given or with
-any changes, are expressly prohibited.
-
-All of the files in this directory and all subdirectories are:
-Copyright (c) 2019 Bogdan Simion, Diane Horton, Jacqueline Smith
-"""
 import datetime
 import json
 from typing import List, Dict
@@ -20,7 +7,7 @@ from phoneline import PhoneLine
 from contract import MTMContract, TermContract, PrepaidContract
 
 def import_data() -> Dict[str, List[Dict]]:
-    """ Open the file <dataset.json> which stores the json data, and return
+    """ Opens the file <dataset.json> which stores the json data, and returns
     a dictionary that stores this data in a format as described in the A1
     handout.
 
@@ -78,7 +65,7 @@ def find_customer_by_number(number: str, customer_list: List[Customer]) \
 
 
 def new_month(customer_list: List[Customer], month: int, year: int) -> None:
-    """ Advance all customers in <customer_list> to a new month of their
+    """ Advancse all customers in <customer_list> to a new month of their
     contract, as specified by the <month> and <year> arguments.
     """
     for cust in customer_list:
@@ -87,15 +74,11 @@ def new_month(customer_list: List[Customer], month: int, year: int) -> None:
 
 def process_event_history(log: Dict[str, List[Dict]],
                           customer_list: List[Customer]) -> None:
-    """ Process the calls from the <log> dictionary. The <customer_list>
+    """ Processes the calls from the <log> dictionary. The <customer_list>
     list contains all the customers that exist in the <log> dictionary.
 
     Construct Call objects from <log> and register the Call into the
     corresponding customer's call history.
-
-    Hint: You must advance all customers to a new month using the new_month()
-    function, everytime a new month is detected for the current event you are
-    extracting.
 
     Preconditions:
     - All calls are ordered chronologically (based on the call's date and time),
@@ -110,12 +93,6 @@ def process_event_history(log: Dict[str, List[Dict]],
     billing_date = datetime.datetime.strptime(log['events'][0]['time'],
                                               "%Y-%m-%d %H:%M:%S")
     billing_month = billing_date.month
-
-    # start recording the bills from this date
-    # Note: uncomment the following lines when you're ready to implement this
-    #
-    # new_month(customer_list, billing_date.month, billing_date.year)
-    #
 
     for event_data in log['events']:
         customer_received = find_customer_by_number(event_data['dst_number'],
@@ -155,16 +132,6 @@ if __name__ == '__main__':
     input_dictionary = import_data()
     customers = create_customers(input_dictionary)
     process_event_history(input_dictionary, customers)
-
-    # ----------------------------------------------------------------------
-    # NOTE: You do not need to understand any of the implementation below,
-    # to be able to solve this assignment. However, feel free to
-    # read it anyway, just to get a sense of how the application runs.
-    # ----------------------------------------------------------------------
-
-    # Gather all calls to be drawn on screen for filtering, but we only want
-    # to plot each call only once, so only plot the outgoing calls to screen.
-    # (Each call is registered as both an incoming and outgoing)
     all_calls = []
     for c in customers:
         hist = c.get_history()
@@ -173,9 +140,9 @@ if __name__ == '__main__':
     print("Total Calls in the dataset:", len(all_calls))
 
     # Main loop for the application.
-    # 1) Wait for user interaction with the system and processes everything
+    # 1) Waits for user interaction with the system and processes everything
     #    appropriately
-    # 2) Take the calls from the results of the filtering and create the
+    # 2) Takes the calls from the results of the filtering and creates the
     #    drawables and connection lines for those calls
     # 3) Display the calls in the visualization window
     events = all_calls
