@@ -1,16 +1,3 @@
-"""
-CSC148, Winter 2019
-Assignment 1
-
-This code is provided solely for the personal and private use of
-students taking the CSC148 course at the University of Toronto.
-Copying for purposes other than this use is expressly prohibited.
-All forms of distribution of this code, whether as given or with
-any changes, are expressly prohibited.
-
-All of the files in this directory and all subdirectories are:
-Copyright (c) 2019 Bogdan Simion, Diane Horton, Jacqueline Smith
-"""
 from typing import List, Union, Tuple, Dict
 from phoneline import PhoneLine
 from call import Call
@@ -19,24 +6,24 @@ from callhistory import CallHistory
 
 class Customer:
     """ A MewbileTech customer.
-
     """
     # === Private Attributes ===
     # _id:
     #     this customer's 4 digit Customer id
     # _phone_lines:
     #     this customer's phone lines
+    
     _id: int
     _phone_lines: List[PhoneLine]
 
     def __init__(self, cid: int) -> None:
-        """ Create a new Customer with the <cid> id
+        """ Creates a new Customer with the <cid> id
         """
         self._id = cid
         self._phone_lines = []
 
     def new_month(self, month: int, year: int) -> None:
-        """ Advance to a new month (specified by <month> and <year>) in the
+        """ Advances to a new month (specified by <month> and <year>) in the
         contracts for each phone line that this customer owns.
 
         Note: we don't care about payments; we assume that this customer pays
@@ -46,7 +33,7 @@ class Customer:
             line.new_month(month, year)
 
     def make_call(self, call: Call) -> None:
-        """ Record that a call was made from the source phone number of <call>.
+        """ Records that a call was made from the source phone number of <call>.
 
         Precondition: The phone line associated with the source phone number of
         <call>, is owned by this customer
@@ -58,7 +45,7 @@ class Customer:
                 x.make_call(call)
 
     def receive_call(self, call: Call) -> None:
-        """ Record that a call was made to the destination phone number of
+        """ Records that a call was made to the destination phone number of
         <call>.
 
         Precondition: The phone line associated with the destination phone
@@ -71,9 +58,9 @@ class Customer:
                 x.receive_call(call)
 
     def cancel_phone_line(self, number: str) -> Union[float, None]:
-        """ Remove PhoneLine with number <number> from this customer and return
+        """ Removes PhoneLine with number <number> from this customer and return
         the amount still owed by this customer.
-        Return None if <number> is not owned by this customer.
+        Returns None if <number> is not owned by this customer.
         """
         fee = None
         for pl in self._phone_lines:
@@ -82,19 +69,13 @@ class Customer:
                 fee = pl.cancel_line()
         return fee
 
-    # ----------------------------------------------------------
-    # NOTE: You do not need to understand the implementation of
-    # the following methods, to be able to solve this assignment
-    # but feel free to read them to get a sense of what these do.
-    # ----------------------------------------------------------
-
     def add_phone_line(self, pline: PhoneLine) -> None:
-        """ Add a new PhoneLine to this customer.
+        """ Adds a new PhoneLine to this customer.
         """
         self._phone_lines.append(pline)
 
     def get_phone_numbers(self) -> List[str]:
-        """ Return a list of all of the numbers this customer owns
+        """ Returns a list of all of the numbers this customer owns
         """
         numbers = []
         for line in self._phone_lines:
@@ -102,12 +83,12 @@ class Customer:
         return numbers
 
     def get_id(self) -> int:
-        """ Return the id for this customer
+        """ Returns the id for this customer
         """
         return self._id
 
     def __contains__(self, item: str) -> bool:
-        """ Check if this customer owns the phone number <item>
+        """ Checks if this customer owns the phone number <item>
         """
         contains = False
         for line in self._phone_lines:
@@ -117,7 +98,7 @@ class Customer:
 
     def generate_bill(self, month: int, year: int) \
             -> Tuple[int, float, List[Dict]]:
-        """ Return a bill summary for the <month> and <year> billing cycle,
+        """ Returns a bill summary for the <month> and <year> billing cycle,
         as a Tuple containing the customer id, total cost for all phone lines,
         and a List of bill summaries generated for each phone line.
         """
@@ -131,7 +112,7 @@ class Customer:
         return self._id, total, bills
 
     def print_bill(self, month: int, year: int) -> None:
-        """ Print the bill for the <month> and <year> billing cycle, to the
+        """ Prints the bill for the <month> and <year> billing cycle, to the
         console.
 
         Precondition:
@@ -150,7 +131,7 @@ class Customer:
 
     def get_history(self) \
             -> Tuple[List[Call], List[Call]]:
-        """ Return all the calls from the call history of this
+        """ Returns all the calls from the call history of this
         customer, as a tuple in the following format:
         (outgoing calls, incoming calls)
         """
@@ -162,7 +143,7 @@ class Customer:
         return history
 
     def get_call_history(self, number: str = None) -> List[CallHistory]:
-        """ Return the call history for <number>, stored into a list.
+        """ Returns the call history for <number>, stored into a list.
         If <number> is not provided, return a list of all call histories for all
         phone lines owned by this customer.
         """
