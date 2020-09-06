@@ -1,16 +1,3 @@
-"""
-CSC148, Winter 2019
-Assignment 1
-
-This code is provided solely for the personal and private use of
-students taking the CSC148 course at the University of Toronto.
-Copying for purposes other than this use is expressly prohibited.
-All forms of distribution of this code, whether as given or with
-any changes, are expressly prohibited.
-
-All of the files in this directory and all subdirectories are:
-Copyright (c) 2019 Bogdan Simion, Diane Horton, Jacqueline Smith
-"""
 import time
 import datetime
 from typing import List, Tuple
@@ -31,16 +18,15 @@ class Filter:
               data: List[Call],
               filter_string: str) \
             -> List[Call]:
-        """ Return a list of all calls from <data>, which match the filter
+        """ Returns a list of all calls from <data>, which match the filter
         specified in <filter_string>.
 
         The <filter_string> is provided by the user through the visual prompt,
         after selecting this filter.
         The <customers> is a list of all customers from the input dataset.
 
-         If the filter has
-        no effect or the <filter_string> is invalid then return the same calls
-        from the <data> input.
+        If the filter has no effect or the <filter_string> is invalid then 
+        returns the same calls from the <data> input.
 
         Precondition:
         - <customers> contains the list of all customers from the input dataset
@@ -49,7 +35,7 @@ class Filter:
         raise NotImplementedError
 
     def __str__(self) -> str:
-        """ Return a description of this filter to be displayed in the UI menu
+        """ Returns a description of this filter to be displayed in the UI menu
         """
         raise NotImplementedError
 
@@ -62,7 +48,7 @@ class ResetFilter(Filter):
               data: List[Call],
               filter_string: str) \
             -> List[Call]:
-        """ Reset all of the applied filters. Return a List containing all the
+        """ Resets all of the applied filters. Returns a List containing all the
         calls corresponding to <customers>.
         The <data> and <filter_string> arguments for this type of filter are
         ignored.
@@ -78,7 +64,7 @@ class ResetFilter(Filter):
         return filtered_calls
 
     def __str__(self) -> str:
-        """ Return a description of this filter to be displayed in the UI menu
+        """ Returns a description of this filter to be displayed in the UI menu
         """
         return "Reset all of the filters applied so far, if any"
 
@@ -91,7 +77,7 @@ class CustomerFilter(Filter):
               data: List[Call],
               filter_string: str) \
             -> List[Call]:
-        """ Return a list of all calls from <data> made or received by the
+        """ Returns a list of all calls from <data> made or received by the
          customer with the id specified in <filter_string>.
 
         The <customers> list contains all customers from the input dataset.
@@ -132,7 +118,7 @@ class CustomerFilter(Filter):
             return data
 
     def __str__(self) -> str:
-        """ Return a description of this filter to be displayed in the UI menu
+        """ Returns a description of this filter to be displayed in the UI menu
         """
         return "Filter events based on customer ID"
 
@@ -146,7 +132,7 @@ class DurationFilter(Filter):
               data: List[Call],
               filter_string: str) \
             -> List[Call]:
-        """ Return a list of all calls from <data> with a duration of under or
+        """ Returns a list of all calls from <data> with a duration of under or
         over the time indicated in the <filter_string>.
 
         The <customers> list contains all customers from the input dataset.
@@ -173,7 +159,7 @@ class DurationFilter(Filter):
         return calls
 
     def __str__(self) -> str:
-        """ Return a description of this filter to be displayed in the UI menu
+        """ Returns a description of this filter to be displayed in the UI menu
         """
         return "Filter calls based on duration; " \
                "L### returns calls less than specified length, G### for greater"
@@ -187,7 +173,7 @@ class LocationFilter(Filter):
               data: List[Call],
               filter_string: str) \
             -> List[Call]:
-        """ Return a list of all calls from <data>, which took place within
+        """ Returns a list of all calls from <data>, which took place within
         a location specified by the <filter_string> (at least the source or the
         destination of the event was in the range of coordinates from the
         <filter_string>).
@@ -233,7 +219,7 @@ class LocationFilter(Filter):
         return calls
 
     def __str__(self) -> str:
-        """ Return a description of this filter to be displayed in the UI menu
+        """ Returns a description of this filter to be displayed in the UI menu
         """
         return "Filter calls made or received in a given rectangular area. " \
                "Format: \"lowerLong, lowerLat, " \
