@@ -1,16 +1,3 @@
-"""
-CSC148, Winter 2019
-Assignment 1
-
-This code is provided solely for the personal and private use of
-students taking the CSC148 course at the University of Toronto.
-Copying for purposes other than this use is expressly prohibited.
-All forms of distribution of this code, whether as given or with
-any changes, are expressly prohibited.
-
-All of the files in this directory and all subdirectories are:
-Copyright (c) 2019 Bogdan Simion, Diane Horton, Jacqueline Smith
-"""
 import datetime
 from math import ceil
 from typing import Optional
@@ -52,21 +39,21 @@ class Contract:
     bill: Optional[Bill]
 
     def __init__(self, start: datetime.date) -> None:
-        """ Create a new Contract with the <start> date, starts as inactive
+        """ Creates a new Contract with the <start> date, starts as inactive
         """
         self.start = start
         self.bill = None
 
     def new_month(self, month: int, year: int, bill: Bill) -> None:
-        """ Advance to a new month in the contract, corresponding to <month> and
+        """ Advances to a new month in the contract, corresponding to <month> and
         <year>. This may be the first month of the contract.
-        Store the <bill> argument in this contract and set the appropriate rate
+        Stores the <bill> argument in this contract and set the appropriate rate
         per minute and fixed cost.
         """
         raise NotImplementedError
 
     def bill_call(self, call: Call) -> None:
-        """ Add the <call> to the bill.
+        """ Adds the <call> to the bill.
 
         Precondition:
         - a bill has already been created for the month+year when the <call>
@@ -76,7 +63,7 @@ class Contract:
         self.bill.add_billed_minutes(ceil(call.duration / 60.0))
 
     def cancel_contract(self) -> float:
-        """ Return the amount owed in order to close the phone line associated
+        """ Returns the amount owed in order to close the phone line associated
         with this contract.
 
         Precondition:
