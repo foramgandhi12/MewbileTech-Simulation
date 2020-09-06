@@ -1,16 +1,3 @@
-"""
-CSC148, Winter 2019
-Assignment 1
-
-This code is provided solely for the personal and private use of
-students taking the CSC148 course at the University of Toronto.
-Copying for purposes other than this use is expressly prohibited.
-All forms of distribution of this code, whether as given or with
-any changes, are expressly prohibited.
-
-All of the files in this directory and all subdirectories are:
-Copyright (c) 2019 Bogdan Simion, Diane Horton, Jacqueline Smith
-"""
 import os
 import threading
 import math
@@ -21,25 +8,6 @@ import pygame
 from call import Drawable, Call
 from customer import Customer
 from filter import DurationFilter, CustomerFilter, LocationFilter, ResetFilter
-
-"""
-=== Module Description ===
-
-This file contains the Visualizer class, which is responsible for interacting
-with Pygame, the graphics library we're using for this assignment.
-There's quite a bit in this file, but you aren't responsible for most of it.
-
-It also contains the Map class, which is responsible for converting between
-longitude/latitude coordinates and pixel coordinates on the pygame window.
-
-DO NOT CHANGE ANY CODE IN THIS FILE, unless instructed in the handout.
-"""
-
-# ----------------------------------------------------------------------------
-# NOTE: You do not need to understand any of the visualization details from
-# this module, to be able to solve this assignment. However, feel free to read
-# it for the fun of understanding the visualization system.
-# ----------------------------------------------------------------------------
 
 WHITE = (255, 255, 255)
 LINE_COLOUR = (0, 64, 125)
@@ -73,7 +41,7 @@ class Visualizer:
     r: Tk
 
     def __init__(self) -> None:
-        """Initialize this visualization.
+        """Initializes this visualization.
         """
         self.r = Tk()
         Label(self.r, text="Welcome to MewbileTech phone management system")\
@@ -85,7 +53,7 @@ class Visualizer:
             (SCREEN_SIZE[0] + 200, SCREEN_SIZE[1]),
             pygame.HWSURFACE | pygame.DOUBLEBUF)
 
-        # Add the text along the side, displaying the command keys for filters
+        # Adds the text along the side, displaying the command keys for filters
         self._uiscreen.fill((125, 125, 125))
         font = pygame.font.SysFont(None, 25)
         self._uiscreen.blit(font.render("FILTER KEYBINDS", True, WHITE),
@@ -112,16 +80,16 @@ class Visualizer:
         self._quit = False
 
     def render_drawables(self, drawables: List[Drawable]) -> None:
-        """Render the <drawables> to the screen
+        """Renders the <drawables> to the screen
         """
-        # Draw the background map onto the screen
+        # Draws the background map onto the screen
         self._screen.fill(WHITE)
         self._screen.blit(self._map.get_current_view(), (0, 0))
 
-        # Add all of the objects onto the screen
+        # Adds all of the objects onto the screen
         self._map.render_objects(drawables, self._screen)
 
-        # Show the new image
+        # Shows the new image
         pygame.display.flip()
 
     def has_quit(self) -> bool:
@@ -132,10 +100,10 @@ class Visualizer:
     def handle_window_events(self, customers: List[Customer],
                              drawables: List[Call]) \
             -> List[Call]:
-        """Handle any user events triggered through the pygame window.
+        """Handles any user events triggered through the pygame window.
         The <drawables> are the objects currently displayed, while the
         <customers> list contains all customers from the input data.
-        Return a new list of Calls, according to user input actions.
+        Returns a new list of Calls, according to user input actions.
         """
         new_drawables = drawables
         for event in pygame.event.get():
@@ -193,12 +161,11 @@ class Visualizer:
                             t.daemon = True
                             t.start()
                             threads.append(t)
-                            # f.apply(customers, data, filter_string)
-                        # Wait to finish
+                        # Waits to finish
                         for t in threads:
                             t.join()
 
-                        # Now reconstruct the data
+                        # Reconstructs the data
                         new_data = []
                         for res in results:
                             new_data.extend(res[0])
@@ -209,7 +176,7 @@ class Visualizer:
                                                       drawables,
                                                       threading_wrapper)
 
-                # Perform the billing for a selected customer:
+                # Performs the billing for a selected customer:
                 if event.unicode == "m":
                     try:
 
@@ -354,7 +321,7 @@ class Map:
     _zoom: int
 
     def __init__(self, screendims: Tuple[int, int]) -> None:
-        """ Initialize this map for the given screen dimensions <screendims>.
+        """ Initializes this map for the given screen dimensions <screendims>.
         """
         self.image = pygame.image.load(
             os.path.join(os.path.dirname(__file__), MAP_FILE))
@@ -368,7 +335,7 @@ class Map:
 
     def render_objects(self, drawables: List[Drawable],
                        screen: pygame.Surface) -> None:
-        """ Render the <drawables> onto the <screen>.
+        """ Renders the <drawables> onto the <screen>.
         """
         for drawable in drawables:
             longlat_position = drawable.get_position()
@@ -384,7 +351,7 @@ class Map:
 
     def _longlat_to_screen(self,
                            location: Tuple[float, float]) -> Tuple[int, int]:
-        """ Convert the <location> long/lat coordinates into pixel coordinates.
+        """ Convertss the <location> long/lat coordinates into pixel coordinates.
         """
         x = round((location[0] - self.min_coords[0]) /
                   (self.max_coords[0] - self.min_coords[0]) *
@@ -400,14 +367,14 @@ class Map:
         return x, y
 
     def pan(self, dp: Tuple[int, int]) -> None:
-        """ Pan the view in the image by <dp> (dx, dy) screenspace pixels.
+        """ Pans the view in the image by <dp> (dx, dy) screenspace pixels.
         """
         self._xoffset -= dp[0]
         self._yoffset -= dp[1]
         self._clamp_transformation()
 
     def zoom(self, dx: float) -> None:
-        """ Zoom the view by <dx> amount.
+        """ Zooms the view by <dx> amount.
 
         The centre of the zoom is the top-left corner of the visible region.
         """
@@ -418,7 +385,7 @@ class Map:
         self._clamp_transformation()
 
     def _clamp_transformation(self) -> None:
-        """ Ensure that the transformation parameters are within a fixed range.
+        """ Ensures that the transformation parameters are within a fixed range.
         """
         raw_width = self.image.get_width()
         raw_height = self.image.get_height()
@@ -429,7 +396,7 @@ class Map:
         self._yoffset = min(raw_height - zoom_height, max(0, self._yoffset))
 
     def get_current_view(self) -> pygame.Surface:
-        """ Get the subimage to display to screen from the map.
+        """ Gets the subimage to display to screen from the map.
         """
         raw_width = self.image.get_width()
         raw_height = self.image.get_height()
